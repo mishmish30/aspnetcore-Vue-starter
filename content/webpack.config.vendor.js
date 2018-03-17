@@ -7,7 +7,7 @@ module.exports = () => {
   console.log('Building vendor files for \x1b[33m%s\x1b[0m', process.env.NODE_ENV)
 
   const isDevBuild = !(process.env.NODE_ENV && process.env.NODE_ENV === 'production')
-  const extractCSS = new ExtractTextPlugin('vendor.css')
+  const extractCSS = new ExtractTextPlugin('vendor.css') // error extracting the bootstrap css text? (see logs)
 
   return [{
     stats: { modules: false },
@@ -51,7 +51,8 @@ module.exports = () => {
         'process.env.NODE_ENV': isDevBuild ? '"development"' : '"production"'
       })
     ].concat(isDevBuild ? [] : [
-      new webpack.optimize.UglifyJsPlugin()
+      // new webpack.optimize.UglifyJsPlugin()
+      // Replaced by a optimize option.
     ])
   }]
 }
