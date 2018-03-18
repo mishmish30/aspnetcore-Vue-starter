@@ -3,13 +3,15 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-module.exports = () => {
+module.exports = (env, argv) => {
   console.log('Building vendor files for \x1b[33m%s\x1b[0m', process.env.NODE_ENV)
 
   const isDevBuild = !(process.env.NODE_ENV && process.env.NODE_ENV === 'production')
   const extractCSS = new ExtractTextPlugin('vendor.css') // error extracting the bootstrap css text? (see logs)
 
   return [{
+    // Redundant, but from Dotnet the mode cannot be set at command line.
+    mode: argv && argv.mode ? argv.mode : (isDevBuild ? 'development' : 'production'),
     stats: { modules: false },
     resolve: {
       extensions: ['.js']

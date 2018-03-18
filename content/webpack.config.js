@@ -4,13 +4,15 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const bundleOutputDir = './wwwroot/dist'
 
-module.exports = () => {
+module.exports = (env, argv) => {
   console.log('Building for \x1b[33m%s\x1b[0m', process.env.NODE_ENV)
 
   const isDevBuild = !(process.env.NODE_ENV && process.env.NODE_ENV === 'production')
   const extractCSS = new ExtractTextPlugin('site.css')
 
   return [{
+    // Redundant, but from Dotnet the mode cannot be set at command line.
+    mode: argv && argv.mode ? argv.mode : (isDevBuild ? 'development' : 'production'),
     stats: { modules: false },
     entry: { 'main': './ClientApp/boot-app.js' },
     resolve: {
