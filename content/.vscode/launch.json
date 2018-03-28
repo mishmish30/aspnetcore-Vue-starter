@@ -9,10 +9,10 @@
       "request": "launch",
       "name": "vuejs: chrome",
       "url": "http://localhost:60497",
-      "webRoot": "${workspaceFolder}/",
+      "webRoot": "${workspaceFolder}/ClientApp",
       "breakOnLoad": true,
       "sourceMapPathOverrides": {
-        "webpack:///*": "${webRoot}/*"
+        "webpack:///ClientApp/*": "${webRoot}/*"
       }
     },
     {

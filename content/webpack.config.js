@@ -65,6 +65,6 @@ module.exports = (env, argv) => {
         }
       })
     ]),
-    devtool: '#source-map'
+    devtool: isDevBuild ? 'source-map' : null
   }]
 }
