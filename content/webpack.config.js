@@ -50,10 +50,10 @@ module.exports = (env, argv) => {
       })
     ].concat(isDevBuild ? [
       // Plugins that apply in development builds only
-      new webpack.SourceMapDevToolPlugin({
-        filename: '[file].map', // Remove this line if you prefer inline source maps
-        moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-      })
+      // new webpack.SourceMapDevToolPlugin({
+      //   filename: '[file].map', // Remove this line if you prefer inline source maps
+      //   moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
+      // })
     ] : [
       // Plugins that apply in production builds only
       // new webpack.optimize.UglifyJsPlugin(), // Updated to an option
@@ -64,6 +64,7 @@ module.exports = (env, argv) => {
           safe: true
         }
       })
-    ])
+    ]),
+    devtool: '#source-map'
   }]
 }
